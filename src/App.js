@@ -64,8 +64,8 @@ function IndexPage() {
 
     <section className="second">
         <div className="container">
-            <div className="row">
-                <div data-aos="fade-right" data-aos-duration="2000" className="col-lg-6 col-sm-12 heading-para">
+            <div className="row ">
+                <div data-aos="fade-right" data-aos-duration="2000" className="col-lg-6 col-sm-12 col-md-12  heading-para">
                     <h3 className="my-5 fav"> <span className="">Master the interview & land a job worth loving</span> </h3>
                     <h2 className="fav2"><span className="practice">Practice...</span><br/><span className="confident">Get Confident...</span><br/><span><em className="hired">Get hired...</em></span></h2>
                     <img src="img/Apti.png" className="s2"/>
