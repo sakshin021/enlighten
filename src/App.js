@@ -3,10 +3,31 @@ import LoginRegister from "./components/LoginRegister/LoginRegister";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import { auth } from "./Firebase";
+import Quiz from "./components/Aptitude/Quiz";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const [username, setUsername] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userId, setUserId] = useState("");
+
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    getQuestions();
+  },[]);
+
+  const getQuestions = async () => {
+    try {
+      const response = await fetch("https://644982a3e7eb3378ca4ba471.mockapi.io/questions");
+      const questionsResponse = await response.json();
+      setQuestions(questionsResponse);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
 
   useEffect(() => {
@@ -14,9 +35,11 @@ function App() {
       if (user) {
         setUsername(user.displayName);
         setIsAuthenticated(true);
+        setUserId(user.uid);
       } else {
         setUsername("");
         setIsAuthenticated(false);
+        setUserId("");
       }
     });
   }, []);
@@ -27,6 +50,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home name={username} isAuthenticated={isAuthenticated} />} />
           <Route path="/login" element={<LoginRegister signUp={false}/>} />
+          <Route path="/quiz" element={( questions.length && <Quiz questions={questions} userId={userId} />)} />
         </Routes>
       </Router>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./LoginRegister.css";
+import styles from "./LoginRegister.module.css";
 import {
   createUserWithEmailAndPassword,
   updateProfile,
@@ -63,27 +63,29 @@ const LoginRegister = (props) => {
   };
 
   return (
-    <div className={`container ${addClass}`} id="container">
-      <div className="form-container sign-up-container">
+    <div className={`${styles.container} ${addClass}`} id="container">
+      <div
+        className={`${styles["form-container"]} ${styles["sign-up-container"]}`}
+      >
         <form>
           <h1>Create Account</h1>
           <input
             type="text"
-            placeholder="NAME"
+            placeholder="Name"
             onChange={(event) =>
               setValues((prev) => ({ ...prev, name: event.target.value }))
             }
           />
           <input
             type="email"
-            placeholder="EMAIL"
+            placeholder="Email"
             onChange={(event) =>
               setValues((prev) => ({ ...prev, email: event.target.value }))
             }
           />
           <input
             type="password"
-            placeholder="PASSWORD"
+            placeholder="Password"
             onChange={(event) =>
               setValues((prev) => ({ ...prev, password: event.target.value }))
             }
@@ -95,12 +97,14 @@ const LoginRegister = (props) => {
         </form>
       </div>
 
-      <div className="form-container sign-in-container">
+      <div
+        className={`${styles["form-container"]} ${styles["sign-in-container"]}`}
+      >
         <form>
           <h1>Login</h1>
           <input
             type="email"
-            placeholder="EMAIL"
+            placeholder="Email"
             onChange={(event) => {
               setSignInValues((prev) => ({
                 ...prev,
@@ -110,7 +114,7 @@ const LoginRegister = (props) => {
           />
           <input
             type="password"
-            placeholder="PASSWORD"
+            placeholder="Password"
             onChange={(event) => {
               setSignInValues((prev) => ({
                 ...prev,
@@ -125,25 +129,35 @@ const LoginRegister = (props) => {
         </form>
       </div>
 
-      <div className="overlay-container">
-        <div className="overlay">
-          <div className="overlay-panel overlay-left">
+      <div className={styles["overlay-container"]}>
+        <div className={styles.overlay}>
+          <div
+            className={`${styles["overlay-panel"]} ${styles["overlay-left"]}`}
+          >
+            <h1>Welcome Back!</h1>
+            <p>
+              To keep connected with us please login with your personal info
+            </p>
             <button
-              className="ghost"
+              className={styles.ghost}
               id="signIn"
-              onClick={() => setAddClass("")}
+              onClick={() => setAddClass(styles[""])}
             >
-              Go To Login
+              Sign in
             </button>
           </div>
 
-          <div className="overlay-panel overlay-right">
+          <div
+            className={`${styles["overlay-panel"]} ${styles["overlay-right"]}`}
+          >
+            <h1>Hello, Friend!</h1>
+            <p>Enter your personal details and start journey with us</p>
             <button
-              className="ghost"
+              className={styles.ghost}
               id="signUp"
-              onClick={() => setAddClass("right-panel-active")}
+              onClick={() => setAddClass(styles["right-panel-active"])}
             >
-              Go To Register
+              Sign up
             </button>
           </div>
         </div>

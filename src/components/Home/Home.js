@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../Firebase";
 import { signOut } from "firebase/auth";
+import Quiz from "../Aptitude/Quiz";
+// import styles from "./Home.module.css";
+import AptiImg from "./img/Apti.png";
+import mockInterviewImg from './img/mockinterview.png';
+import image from './img/images.jpeg';
+import infoImg from './img/infoImg.jpeg';
+
 
 const Home = (props) => {
   const handleLogout = () => {
@@ -16,6 +23,8 @@ const Home = (props) => {
 
   return (
     <div>
+
+
       <div>
         {!props.isAuthenticated && (
           <h1>
@@ -31,6 +40,12 @@ const Home = (props) => {
         <br />
         <br />
         <h2>{props.name ? `Welcome - ${props.name}` : "Login please"}</h2>
+
+        {props.isAuthenticated && (
+          <h1>
+            <Link to="/quiz">Quiz</Link>
+          </h1>
+        )}
       </div>
     </div>
   );
