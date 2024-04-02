@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import { auth } from "./Firebase";
 import Quiz from "./components/Aptitude/Quiz";
+import Dashboard from "./components/Dashboard/Dashboard";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/" element={<Home name={username} isAuthenticated={isAuthenticated} />} />
           <Route path="/login" element={<LoginRegister signUp={false}/>} />
           <Route path="/quiz" element={( questions.length && <Quiz questions={questions} userId={userId} />)} />
+          <Route path="/dashboard" element={<Dashboard/>} />
         </Routes>
       </Router>
     </div>
