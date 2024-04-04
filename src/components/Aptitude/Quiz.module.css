@@ -58,7 +58,7 @@
 .total-question {
   font-size: 16px;
   font-weight: 500;
-  color: #9c9c9c;
+  color: #150080;
 }
 
 h2 {
@@ -77,18 +77,20 @@ li {
   list-style: none;
   color: #2d264b;
   font-size: 16px;
-  background: #fff;
+  background: #eee;
   border: 1px solid #9c9c9c;
   border-radius: 16px;
   padding: 11px;
+  padding-left: 20px;
   margin-top: 15px;
   cursor: pointer;
+  border: none;
 }
 
 .selected-ans {
   background: #150080;
-  border: 1px solid #d08642;
   color: #fff;
+  box-shadow: 0px 4px 6px rgba(21, 0, 128, 0.5);
 }
 
 .footer {
@@ -110,6 +112,12 @@ li {
 
 .footer button {
     margin-top: 15px;
+    background-color: #150080;
+    border: none;
+}
+
+.footer button:hover {
+  box-shadow: 0px 4px 6px rgba(21, 0, 128, 0.5);
 }
 
 .footer button:disabled {
@@ -117,10 +125,21 @@ li {
   color: #9c9c9c;
   cursor: not-allowed;
   margin-top: 15px;
+  border: none;
 }
 
 .result {
   text-align: center;
+}
+
+.result button {
+  margin-top: 15px;
+    background-color: #150080;
+    border: none;
+}
+
+.result button:hover {
+  box-shadow: 0px 4px 6px rgba(21, 0, 128, 0.5);
 }
 
 .result h3 {

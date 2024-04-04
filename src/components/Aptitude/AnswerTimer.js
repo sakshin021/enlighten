@@ -22,7 +22,7 @@ const AnswerTimer = ({ duration, onTimeUp }) => {
 
       setTimeout(() => {
         onTimeUp();
-      }, 3000);
+      }, 1000);
     }
   }, [counter]);
 

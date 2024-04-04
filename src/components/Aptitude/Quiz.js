@@ -17,8 +17,8 @@ import { db } from "../../Firebase";
 const Quiz = ({ questions, userId }) => {
   const [currQuestion, setCurrQuestion] = useState(0);
   const [answerIdx, setAnswerIdx] = useState(null);
-  const [answer, setAnswer] = useState(null);
-  const { question, choices, correctAnswer, type } = questions[currQuestion];
+  const [ans, setAns] = useState(null);
+  const { question, options, answer } = questions[currQuestion];
   const [result, setResult] = useState(resultInitialState);
   const [showResult, setShowResult] = useState(false);
   const [showAnswerTimer, setShowAnswerTimer] = useState(true);
@@ -60,12 +60,12 @@ const Quiz = ({ questions, userId }) => {
     }
   }, [sendResult]);
 
-  const onAnswerClick = (answer, index) => {
+  const onAnswerClick = (ans, index) => {
     setAnswerIdx(index);
-    if (answer === correctAnswer) {
-      setAnswer(true);
+    if (ans === answer) {
+      setAns(true);
     } else {
-      setAnswer(false);
+      setAns(false);
     }
   };
 
@@ -77,7 +77,7 @@ const Quiz = ({ questions, userId }) => {
         ? {
             ...prev,
             score: prev.score + 5,
-            correctAnswer: prev.correctAnswer + 1,
+            answer: prev.answer + 1,
           }
         : {
             ...prev,
@@ -107,17 +107,17 @@ const Quiz = ({ questions, userId }) => {
   };
 
   const handleTimeUp = () => {
-    setAnswer(false);
+    setAns(false);
     onClickNext(false);
   };
 
   const handleInputChange = (event) => {
     setInputAnswer(event.target.value);
 
-    if (event.target.value === correctAnswer) {
-      setAnswer(true);
+    if (event.target.value === answer) {
+      setAns(true);
     } else {
-      setAnswer(false);
+      setAns(false);
     }
   };
 
@@ -140,13 +140,9 @@ const Quiz = ({ questions, userId }) => {
   };
 
   const getAnswerUI = () => {
-    if (type === "FIB") {
-      return <input value={inputAnswer} onChange={handleInputChange} />;
-    }
-
     return (
       <u1>
-        {choices.map((choice, index) => (
+        {options.map((choice, index) => (
           <li
             onClick={() => onAnswerClick(choice, index)}
             key={choice}
@@ -164,9 +160,9 @@ const Quiz = ({ questions, userId }) => {
       <div className={styles["quiz-container"]}>
         {!showResult ? (
           <>
-            {/* {showAnswerTimer && (
-              <AnswerTimer duration={5} onTimeUp={handleTimeUp} />
-            )} */}
+            {showAnswerTimer && (
+              <AnswerTimer duration={60} onTimeUp={handleTimeUp} />
+            )}
             <div className="QuestionNo">
             <span className={styles["active-question-no"]}>
               {currQuestion + 1}
@@ -179,7 +175,7 @@ const Quiz = ({ questions, userId }) => {
             {getAnswerUI()}
             <div className={styles.footer}>
               <button
-                onClick={() => onClickNext(answer)}
+                onClick={() => onClickNext(ans)}
                 disabled={answerIdx === null && !inputAnswer}
               >
                 {currQuestion === questions.length - 1 ? "Finish" : "Next"}
@@ -196,7 +192,7 @@ const Quiz = ({ questions, userId }) => {
               Total Score : <span>{result.score}</span>
             </p>
             <p>
-              Correct Answers : <span>{result.correctAnswer}</span>
+              Correct Answers : <span>{questions.length - result.wrongAnswer}</span>
             </p>
             <p>
               Wrong Answers : <span>{result.wrongAnswer}</span>
