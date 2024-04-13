@@ -13,6 +13,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { db } from "../../Firebase";
+import HashLoader from "react-spinners/HashLoader";
 
 const Quiz = ({ questions, userId }) => {
   const [currQuestion, setCurrQuestion] = useState(0);
@@ -146,7 +147,7 @@ const Quiz = ({ questions, userId }) => {
           <li
             onClick={() => onAnswerClick(choice, index)}
             key={choice}
-            className={answerIdx === index ? `${styles["selected-ans"]}` : null}
+            className={answerIdx === index ? `${styles["selected-ans"]} ${styles.lista}` : styles.lista}
           >
             {choice}
           </li>
@@ -155,52 +156,74 @@ const Quiz = ({ questions, userId }) => {
     );
   };
 
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+  }, []);
   return (
-    <div className={styles.QuizContainer}>
-      <div className={styles["quiz-container"]}>
-        {!showResult ? (
-          <>
-            {showAnswerTimer && (
-              <AnswerTimer duration={60} onTimeUp={handleTimeUp} />
+    <div>
+      {loading ? (
+        <HashLoader
+          color={"#104254"}
+          loading={loading}
+          size={50}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          className="spinner bg-sky-0"
+          style={{ marginTop: "1rem", marginBottom: "2rem" }}
+        />
+      ) : (
+        <div className={styles.QuizContainer}>
+          <div className={styles["quiz-container"]}>
+            {!showResult ? (
+              <>
+                {showAnswerTimer && (
+                  <AnswerTimer duration={60} onTimeUp={handleTimeUp} />
+                )}
+                <div className="QuestionNo">
+                  <span className={styles["active-question-no"]}>
+                    {currQuestion + 1}
+                  </span>
+                  <span className={styles["total-question"]}>
+                    /{questions.length}
+                  </span>
+                </div>
+                <h2 className="quizh2">{question}</h2>
+                {getAnswerUI()}
+                <div className={styles.footer}>
+                  <button
+                    onClick={() => onClickNext(ans)}
+                    disabled={answerIdx === null && !inputAnswer}
+                  >
+                    {currQuestion === questions.length - 1 ? "Finish" : "Next"}
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className={styles.result}>
+                <h3>Result</h3>
+                <p>
+                  Total Questions : <span>{questions.length}</span>
+                </p>
+                <p>
+                  Total Score : <span>{result.score}</span>
+                </p>
+                <p>
+                  Correct Answers :{" "}
+                  <span>{questions.length - result.wrongAnswer}</span>
+                </p>
+                <p>
+                  Wrong Answers : <span>{result.wrongAnswer}</span>
+                </p>
+                <button onClick={onClickTryAgain}>Try again</button>
+              </div>
             )}
-            <div className="QuestionNo">
-            <span className={styles["active-question-no"]}>
-              {currQuestion + 1}
-            </span>
-            <span className={styles["total-question"]}>
-              /{questions.length}
-            </span>
-            </div>
-            <h2>{question}</h2>
-            {getAnswerUI()}
-            <div className={styles.footer}>
-              <button
-                onClick={() => onClickNext(ans)}
-                disabled={answerIdx === null && !inputAnswer}
-              >
-                {currQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </button>
-            </div>
-          </>
-        ) : (
-          <div className={styles.result}>
-            <h3>Result</h3>
-            <p>
-              Total Questions : <span>{questions.length}</span>
-            </p>
-            <p>
-              Total Score : <span>{result.score}</span>
-            </p>
-            <p>
-              Correct Answers : <span>{questions.length - result.wrongAnswer}</span>
-            </p>
-            <p>
-              Wrong Answers : <span>{result.wrongAnswer}</span>
-            </p>
-            <button onClick={onClickTryAgain}>Try again</button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

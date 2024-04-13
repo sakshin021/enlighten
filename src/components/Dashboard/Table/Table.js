@@ -23,7 +23,7 @@ const rows = [
 export default function BasicTable() {
   return (
     <div className="Table">
-      <h3 style={{textAlign: 'center', padding:'15px 0'}}>Recent Orders</h3>
+      <h3 style={{textAlign: 'center', padding:'15px 0', color: '#12343b', fontSize : '1.2rem'}}>Recent Orders</h3>
 
       <TableContainer component={Paper}
       style={{boxShadow: '0px 13px 20px 0px #80808029'}}>

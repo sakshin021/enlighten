@@ -12,6 +12,14 @@
     font-family: 'Montserrat', sans-serif;
 } 
 */
+.spinner{
+  position: absolute;
+  margin: auto;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
 .QuizContainer {
   font-family: "Courier New", Courier, monospace;
@@ -23,21 +31,21 @@
   width: 100vw;
   align-items: center;
   /* background: linear-gradient(rgb(248, 212, 154) -146.42%, rgb(255 202 113) -46.42%) */
-  background-image: url('img3.jpeg');
+  background-image: url('newImg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   justify-content: flex-start;
-  padding-left: 6rem;
+  padding-left: 24rem;
 }
 
 .quiz-container {
-  background-color: #ffff;
+  background-color: #a7dcff;
   border-radius: 4px;
   padding: 30px 60px;
   box-sizing: border-box;
   position: relative;
   background: rgba(255, 255, 255, 0.54);
-  width: 60%;
+  width: 70%;
   height: 60%;
   display: flex;
   flex-direction: column;
@@ -52,45 +60,54 @@
 .active-question-no {
   font-size: 32px;
   font-weight: 500;
-  color: #150080;
+  color: #2173a3;
+  margin-left: 20rem;
 }
 
 .total-question {
   font-size: 16px;
-  font-weight: 500;
-  color: #150080;
+  font-weight: 600;
+  color: #1e6a7d;
 }
 
 h2 {
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 600;
   margin: 0;
+  color: #1e6a7d;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 ul {
-  margin-top: 20px;
-  margin-left: -40px;
+  /* margin-left: -40px; */ 
+  margin-bottom: 1rem;
 }
 
-li {
+.lista {
   text-decoration: none;
   list-style: none;
   color: #2d264b;
   font-size: 16px;
-  background: #eee;
+  font-weight: 900;
+  color: #72b2c2;
+  background: #edf2f3;
   border: 1px solid #9c9c9c;
   border-radius: 16px;
-  padding: 11px;
-  padding-left: 20px;
+  padding: 5px;  
+  padding-left: 2rem;
   margin-top: 15px;
+  margin-left: 14rem;
   cursor: pointer;
   border: none;
+  width: 15rem;
 }
 
 .selected-ans {
-  background: #150080;
+  background: #2f6eac;
   color: #fff;
-  box-shadow: 0px 4px 6px rgba(21, 0, 128, 0.5);
+  box-shadow: 0px 4px 6px rgba(58, 124, 160, 0.5);
+  font-weight:800;
 }
 
 .footer {
@@ -112,17 +129,17 @@ li {
 
 .footer button {
     margin-top: 15px;
-    background-color: #150080;
+    background-color: #4080c1;
     border: none;
 }
 
 .footer button:hover {
-  box-shadow: 0px 4px 6px rgba(21, 0, 128, 0.5);
+  box-shadow: 0px 4px 6px rgba(58, 124, 160, 0.5);
 }
 
 .footer button:disabled {
-  background: #e7e8e9;
-  color: #9c9c9c;
+  background: #0f5c9c;
+  color: #d8e7f4;
   cursor: not-allowed;
   margin-top: 15px;
   border: none;
