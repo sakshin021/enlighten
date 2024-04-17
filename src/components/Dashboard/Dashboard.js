@@ -1,11 +1,11 @@
 import './Dashboard.css';
 import MainDash from './MainDash/MainDash';
 
-const Dashboard = () => {
+const Dashboard = (props) => {
     return (
         <div className="Dashboard">
         <div className='DashboardGlass'>
-          <MainDash />
+          <MainDash userId={props.userId} />
         </div>
     </div>
     )

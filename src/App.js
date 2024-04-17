@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import { auth } from "./Firebase";
 import Quiz from "./components/Aptitude/Quiz";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Interview from "./components/Interview/Interview";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -61,7 +62,8 @@ function App() {
               questions.length && <Quiz questions={questions} userId={userId} />
             }
           />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard userId={userId} />} />
+          <Route path="/interview" element={<Interview />} />
         </Routes>
       </Router>
     </div>

@@ -1,10 +1,10 @@
 import Cards from "../Cards/Cards";
-import Table from "../Table/Table";
+import BasicTable from "../Table/Table";
 import React, { useEffect, useState } from "react";
 import "./MainDash.css";
 import HashLoader from "react-spinners/HashLoader";
 
-const MainDash = () => {
+const MainDash = (props) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -34,7 +34,7 @@ const MainDash = () => {
             Dashboard
           </h1>
           <Cards />
-          <Table />
+          <BasicTable userId={props.userId} />
         </div>
       )}
     </div>
