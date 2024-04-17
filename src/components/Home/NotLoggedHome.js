@@ -22,10 +22,11 @@ import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Parallax } from "react-parallax";
 import { auth } from "../../Firebase";
 import { signOut } from "firebase/auth";
+import HashLoader from "react-spinners/HashLoader";
 
 function OptionSection(props) {
   return (
@@ -298,137 +299,174 @@ export function NotLoggedHomePage(props) {
       });
   };
 
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+  }, []);
+
   return (
     <>
-      <Parallax
-        bgImage="https://stm-qrops.com/wp-content/uploads/2016/06/parallax-light-blue-home-1.gifg"
-        strength={200}
-        style={{
-          // width:"50vw",
-          height: "100vh",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div style={{ height: 400 }}>
-          <div className="flex flex-col  bg-sky-950 text-white">
-            <nav className="flex items-center justify-between px-6 py-3 bg-cyan-800 ">
-              <img
-                alt="Image"
-                className="object-cover rounded-es-3xl rounded-tr-3xl mx-32 border-double border-4 border-sky-500"
-                height="75"
-                src="Homes/img/logo_Enlighten.png"
-                style={{
-                  aspectRatio: "95/75",
-                  objectFit: "cover",
-                }}
-                width="95"
-              />
-              <div className="flex items-center space-x-4 mx-32">
-                <Link className="hover:text-gray-300" style={{fontSize:"20px", margin:"10px"}} to="/">
-                  <FontAwesomeIcon icon={faHouse} />
-                </Link>
-                {props.isAuthenticated ? (
-                  <Link className="hover:text-gray-300" style={{fontSize:"20px", margin:"10px"}} to="/Dashboard">
-                    <FontAwesomeIcon icon={faChartSimple} />
-                  </Link>
-                ) : (
-                  <Link className="hover:text-gray-300" style={{fontSize:"20px", margin:"10px"}} to="/Login">
-                    <FontAwesomeIcon icon={faChartSimple} />
-                  </Link>
-                )}
-                {/* <Button className="bg-[#bd1e59] hover:bg-[#a31645]">Register/Login</Button> */}
+      {loading ? (
+        <HashLoader
+          color={"#104254"}
+          loading={loading}
+          size={50}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          className="spinner bg-sky-0"
+          style={{ marginTop: "1rem", marginBottom: "2rem" }}
+        />
+      ) : (
+        <div>
+          <Parallax
+            bgImage="https://stm-qrops.com/wp-content/uploads/2016/06/parallax-light-blue-home-1.gifg"
+            strength={200}
+            style={{
+              // width:"50vw",
+              height: "100vh",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <div style={{ height: 400 }}>
+              <div className="flex flex-col  bg-sky-950 text-white">
+                <nav className="flex items-center justify-between px-6 py-3 bg-cyan-950 ">
+                  <img
+                    alt="Image"
+                    className="object-cover rounded-es-3xl rounded-tr-3xl mx-32 border-double border-4 border-sky-500"
+                    height="75"
+                    src="Homes/img/logo_Enlighten.png"
+                    style={{
+                      aspectRatio: "95/75",
+                      objectFit: "cover",
+                    }}
+                    width="95"
+                  />
+                  <div className="flex items-center space-x-4 mx-32">
+                    <Link
+                      className="hover:text-gray-300"
+                      style={{ fontSize: "20px", margin: "10px" }}
+                      to="/"
+                    >
+                      <FontAwesomeIcon icon={faHouse} />
+                    </Link>
+                    {props.isAuthenticated ? (
+                      <Link
+                        className="hover:text-gray-300"
+                        style={{ fontSize: "20px", margin: "10px" }}
+                        to="/Dashboard"
+                      >
+                        <FontAwesomeIcon icon={faChartSimple} />
+                      </Link>
+                    ) : (
+                      <Link
+                        className="hover:text-gray-300"
+                        style={{ fontSize: "20px", margin: "10px" }}
+                        to="/Login"
+                      >
+                        <FontAwesomeIcon icon={faChartSimple} />
+                      </Link>
+                    )}
+                    {/* <Button className="bg-[#bd1e59] hover:bg-[#a31645]">Register/Login</Button> */}
 
-                {props.isAuthenticated ? (
-                  <button
-                    className={cn(
-                      buttonVariants(),
-                      "bg-cyan-950 hover:bg-[#5d8bb6] text-white font-bold"
+                    {props.isAuthenticated ? (
+                      <button
+                        className={cn(
+                          buttonVariants(),
+                          "bg-cyan-800 hover:bg-[#5d8bb6] text-white font-bold"
+                        )}
+                        style={{ border: "none" }}
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </button>
+                    ) : (
+                      <Link
+                        className={cn(
+                          buttonVariants(),
+                          "bg-cyan-800 hover:bg-[#5d8bb6] text-white font-bold"
+                        )}
+                        style={{ textDecoration: "none" }}
+                        to="/login"
+                      >
+                        Login
+                      </Link>
                     )}
-                    style={{ border: "none" }}
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
-                ) : (
-                  <Link
-                    className={cn(
-                      buttonVariants(),
-                      "bg-cyan-950 hover:bg-[#5d8bb6] text-white font-bold"
-                    )}
-                    style={{ textDecoration: "none" }}
-                    to="/login"
-                  >
-                    Login
-                  </Link>
-                )}
+                  </div>
+                </nav>
+                <main className="flex flex-col md:flex-row items-center justify-between px-6 py-16 gap-6 md:gap-0 bg-cyan-950	">
+                  <div className="space-y-6 mx-32 my-8 md:w-[400px] lg:w-[450px]">
+                    <div data-aos="fade-right" data-aos-duration="1800">
+                      <h2
+                        className="text-5xl font-bold leading-tight"
+                        style={{ color: "#fff" }}
+                      >
+                        MASTER THE INTERVIEW
+                        <br />& LAND A JOB WORTH LOVING{"\n                  "}
+                      </h2>
+                    </div>
+                    <div data-aos="fade-right" data-aos-duration="1800">
+                      <p className="text-3xl font-semibold">
+                        Practice...
+                        <br />
+                        Get Confident...
+                        <br />
+                        GET HIRED...{"\n                  "}
+                      </p>
+                    </div>
+                  </div>
+                  <div data-aos="fade-left" data-aos-duration="1800">
+                    <img
+                      alt="Interview preparation"
+                      className="rounded-lg mx-32 overflow-hidden"
+                      height="400"
+                      src="Homes/img/img.png"
+                      style={{
+                        aspectRatio: "600/400",
+                        objectFit: "cover",
+                      }}
+                      width="600"
+                    />
+                  </div>
+                </main>
               </div>
-            </nav>
-            <main className="flex flex-col md:flex-row items-center justify-between px-6 py-16 gap-6 md:gap-0 bg-cyan-950	">
-              <div className="space-y-6 mx-32 my-8 md:w-[400px] lg:w-[450px]">
-                <div data-aos="fade-right" data-aos-duration="1800">
-                  <h2 className="text-5xl font-bold leading-tight" style={{color:"#fff"}}>
-                    MASTER THE INTERVIEW
-                    <br />& LAND A JOB WORTH LOVING{"\n                  "}
-                  </h2>
-                </div>
-                <div data-aos="fade-right" data-aos-duration="1800">
-                  <p className="text-3xl font-semibold">
-                    Practice...
-                    <br />
-                    Get Confident...
-                    <br />
-                    GET HIRED...{"\n                  "}
-                  </p>
-                </div>
-              </div>
-              <div data-aos="fade-left" data-aos-duration="1800">
+            </div>
+          </Parallax>
+
+          <OptionSection isAuthenticated={props.isAuthenticated} />
+          <Parallax
+            bgImage="https://stm-qrops.com/wp-content/uploads/2016/06/parallax-light-blue-home-1.gifg"
+            strength={200}
+            style={{
+              // width:"50vw",
+              height: "100vh",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <div style={{ height: 400 }}>
+              <div data-aos="zoom-in-down" data-aos-duration="1800">
                 <img
                   alt="Interview preparation"
-                  className="rounded-lg mx-16 overflow-hidden"
-                  height="400"
-                  src="Homes/img/Apti.png"
+                  className="mx-1 my-12 overflow-hidden rounded-xl"
+                  height="600"
+                  src="Homes/img/infoimg.jpeg"
                   style={{
-                    aspectRatio: "600/400",
+                    aspectRatio: "1510/600",
                     objectFit: "cover",
+                    marginBottom: "1rem",
                   }}
-                  width="600"
+                  width="1510"
                 />
               </div>
-            </main>
-          </div>
+            </div>
+          </Parallax>
+          <FooterSection />
         </div>
-      </Parallax>
-
-      <OptionSection isAuthenticated={props.isAuthenticated} />
-      <Parallax
-        bgImage="https://stm-qrops.com/wp-content/uploads/2016/06/parallax-light-blue-home-1.gifg"
-        strength={200}
-        style={{
-          // width:"50vw",
-          height: "100vh",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div style={{ height: 400 }}>
-          <div data-aos="zoom-in-down" data-aos-duration="1800">
-            <img
-              alt="Interview preparation"
-              className="mx-1 my-12 overflow-hidden rounded-xl"
-              height="600"
-              src="Homes/img/infoimg.jpeg"
-              style={{
-                aspectRatio: "1510/600",
-                objectFit: "cover",
-                marginBottom: "1rem",
-              }}
-              width="1510"
-            />
-          </div>
-        </div>
-      </Parallax>
-      <FooterSection />
+      )}
     </>
   );
 }

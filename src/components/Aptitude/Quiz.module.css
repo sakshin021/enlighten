@@ -183,3 +183,13 @@ input {
   margin-top: 20px;
   box-sizing: border-box;
 }
+
+.passed {
+  color: green;
+  font-weight: bold;
+}
+
+.failed {
+  color: green;
+  font-weight: bold;
+}
