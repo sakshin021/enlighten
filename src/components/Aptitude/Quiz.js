@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { resultInitialState } from "./constants";
 import AnswerTimer from "./AnswerTimer";
 import styles from "./Quiz.module.css";
+import { Link } from "react-router-dom";
 import {
   addDoc,
   collection,
@@ -77,7 +78,7 @@ const Quiz = ({ questions, userId }) => {
       finalAnswer
         ? {
             ...prev,
-            score: prev.score + 5,
+            score: prev.score + 1,
             answer: prev.answer + 1,
           }
         : {
@@ -142,17 +143,21 @@ const Quiz = ({ questions, userId }) => {
 
   const getAnswerUI = () => {
     return (
-      <u1>
+      <ul>
         {options.map((choice, index) => (
           <li
             onClick={() => onAnswerClick(choice, index)}
             key={choice}
-            className={answerIdx === index ? `${styles["selected-ans"]} ${styles.lista}` : styles.lista}
+            className={
+              answerIdx === index
+                ? `${styles["selected-ans"]} ${styles.lista}`
+                : styles.lista
+            }
           >
             {choice}
           </li>
         ))}
-      </u1>
+      </ul>
     );
   };
 
@@ -218,7 +223,27 @@ const Quiz = ({ questions, userId }) => {
                 <p>
                   Wrong Answers : <span>{result.wrongAnswer}</span>
                 </p>
-                <button onClick={onClickTryAgain}>Try again</button>
+                {result.wrongAnswer > 2 ? (
+                  <div>
+                    <p className={`${styles.failed} text-lg font-bold mt-3`}>
+                      Sorry, you failed! Better luck next time.
+                    </p>
+                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3" onClick={onClickTryAgain}>
+                        Try Again
+                      </button>
+                  </div>
+                ) : (
+                  <div>
+                    <p className={`${styles.passed} text-lg font-bold mt-3`}>
+                      Congratulations, you passed!
+                    </p>
+                    <Link to="/">
+                      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3">
+                        Home
+                      </button>
+                    </Link>
+                  </div>
+                )}
               </div>
             )}
           </div>
