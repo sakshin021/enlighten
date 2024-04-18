@@ -225,7 +225,7 @@ const Quiz = ({ questions, userId }) => {
                 </p>
                 {result.wrongAnswer > 2 ? (
                   <div>
-                    <p className={`${styles.failed} text-lg font-bold mt-3`}>
+                    <p className={`${styles.failed} text-lg font-bold mt-3`} style={{fontWeight: "bold"}}>
                       Sorry, you failed! Better luck next time.
                     </p>
                       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3" onClick={onClickTryAgain}>
@@ -234,7 +234,7 @@ const Quiz = ({ questions, userId }) => {
                   </div>
                 ) : (
                   <div>
-                    <p className={`${styles.passed} text-lg font-bold mt-3`}>
+                    <p className={`${styles.passed} text-lg font-bold mt-3`} style={{fontWeight: "bold"}}>
                       Congratulations, you passed!
                     </p>
                     <Link to="/">

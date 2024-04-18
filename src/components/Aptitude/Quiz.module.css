@@ -190,6 +190,6 @@ input {
 }
 
 .failed {
-  color: green;
+  color: red;
   font-weight: bold;
 }
