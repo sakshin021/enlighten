@@ -230,7 +230,12 @@ const Quiz = ({ questions, userId }) => {
                     </p>
                       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-3" onClick={onClickTryAgain}>
                         Try Again
+                      </button> <br/>
+                      <Link to="/">
+                      <button className="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded mt-3">
+                        Home
                       </button>
+                    </Link>
                   </div>
                 ) : (
                   <div>

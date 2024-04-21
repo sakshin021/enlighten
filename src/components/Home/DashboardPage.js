@@ -11,6 +11,7 @@ export default function DashboardPage(props) {
       {props.isAuthenticated && (
         <h1>
           <Link to="/quiz">Quiz</Link>
+          <Link to="/quizother">Quizother</Link>
         </h1>
       )}
     </>

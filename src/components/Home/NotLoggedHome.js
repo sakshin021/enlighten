@@ -337,10 +337,10 @@ export function NotLoggedHomePage(props) {
                   <img
                     alt="Image"
                     className="object-cover rounded-es-3xl rounded-tr-3xl mx-32 border-double border-4 border-sky-500"
-                    height="75"
+                    height="90"
                     src="Homes/img/logo_Enlighten.png"
                     style={{
-                      aspectRatio: "95/75",
+                      aspectRatio: "95/90",
                       objectFit: "cover",
                     }}
                     width="95"
