@@ -6,6 +6,7 @@ import { auth } from "./Firebase";
 import Quiz from "./components/Aptitude/Quiz";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Interview from "./components/Interview/Interview";
+import MockApti from './components/MockApti/MockApti';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -64,6 +65,9 @@ function App() {
           />
           <Route path="/dashboard" element={<Dashboard userId={userId} />} />
           <Route path="/interview" element={<Interview />} />
+          <Route path='/aptiInterview'  element={
+              questions.length && <MockApti questions={questions} userId={userId} />
+            } />
         </Routes>
       </Router>
     </div>

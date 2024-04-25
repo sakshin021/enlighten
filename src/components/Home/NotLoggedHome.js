@@ -27,6 +27,7 @@ import { Parallax } from "react-parallax";
 import { auth } from "../../Firebase";
 import { signOut } from "firebase/auth";
 import HashLoader from "react-spinners/HashLoader";
+import MockApti from "../MockApti/MockApti";
 
 function OptionSection(props) {
   return (
@@ -210,7 +211,7 @@ function OptionSection(props) {
                   {props.isAuthenticated ? (
                     <Link
                       className="group overflow-hidden rounded-xl relative border border-gray-200 shadow-sm w-full aspect-square transition-transform translate-y-0 hover:translate-y-[-2px] focus-within:outline-none focus-within:ring-1 focus-within:ring-gray-950"
-                      to="/Quiz"
+                      to="/aptiInterview"
                     >
                       <div className="aspect-[16/9]">
                         <img
