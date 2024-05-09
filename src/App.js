@@ -23,7 +23,7 @@ function App() {
   const getQuestions = async () => {
     try {
       let newQuestionsArr = [];
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 15; i++) {
         const response = await fetch("https://aptitude-api.vercel.app/Random");
         const questionsResponse = await response.json();
         newQuestionsArr = [...newQuestionsArr, questionsResponse];
