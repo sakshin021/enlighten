@@ -28,6 +28,7 @@ import { auth } from "../../Firebase";
 import { signOut } from "firebase/auth";
 import HashLoader from "react-spinners/HashLoader";
 import MockApti from "../MockApti/MockApti";
+import infoImg from './infoImg.jpeg';
 
 function OptionSection(props) {
   return (
@@ -454,7 +455,7 @@ export function NotLoggedHomePage(props) {
                   alt="Interview preparation"
                   className="mx-1 my-12 overflow-hidden rounded-xl"
                   height="600"
-                  src="Homes/img/infoimg.jpeg"
+                  src={infoImg}
                   style={{
                     aspectRatio: "1510/600",
                     objectFit: "cover",
